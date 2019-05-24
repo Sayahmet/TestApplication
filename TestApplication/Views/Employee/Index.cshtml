@@ -1,0 +1,47 @@
+﻿@using TestApplication.Models
+@model IEnumerable<EmployeeModel>
+@{
+    ViewBag.Title = "Сотрудники";
+}
+
+<div>
+    <h3>Сотрудники</h3>
+
+    <p>
+        @Html.ActionLink("Добавить нового", "Create")
+    </p>
+
+    @using (Html.BeginForm())
+    {
+        <p>
+            Искать по имени: @Html.TextBox("name")
+            Искать по должности: @Html.TextBox("position")
+            <input type="submit" value="Search" />
+        </p>
+    }
+
+    <table class="table">
+        <tr class="header">
+            <td></td>
+            <td><p>Фамилия</p></td>
+            <td><p>Имя</p></td>
+            <td><p>Отчество</p></td>
+            <td><p>Должность</p></td>
+        </tr>
+        @foreach (var e in Model)
+        {
+            <tr>
+                <td>
+                    <p>
+                        @Html.ActionLink("Edit", "Edit", new { id = e.Id }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = e.Id })
+                    </p>
+                </td>
+                <td><p>@e.Surname</p></td>
+                <td><p>@e.Name</p></td>
+                <td><p>@e.Patronomyc</p></td>
+                <td><p>@e.Position</p></td>
+            </tr>
+        }
+    </table>
+</div>
